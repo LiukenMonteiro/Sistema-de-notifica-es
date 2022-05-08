@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+    <html lang="pt-br">
+         <head>
+             <meta charset="UTF-8">
+             <title>Notificações Jquery</title>
+             <meta name="author" content="Developer Fred Viana">
+             <meta name="viewport" content="width=device-width, initial-scale=1.0">
+             <link href="Notificacoes.css" rel="stylesheet" type="text/css">
+             <link href="icons-v1.0/style.css" rel="stylesheet" type="text/css">
+         </head>
+       
+        
+        
+        <body bgcolor="#e1e6ef">
+            
+            <center><br><h3>NOTIFICAÇÕES</h3></center>
+            
+            <div id="pNotas" class="tran1">
+                <div id="notas" class="j_close1"> <!-- CLASSE DE FECHAMENTO PARA BOTÃO COM ONCLICK -->
+                    <span class="icon-close2" onclick="javascript:fechar('.j_close1');"></span>
+                    <div id="icon_notas">
+                        <p class="boxNum icon-true"></p><!-- ICONE DE NOTIFICAÇÃO -->
+                        <i class="icon-sino"></i>
+                    </div>
+                    <div id="msgnota">
+                        <p>Comando enviado com sucesso!</p>
+                    </div>
+                </div>
+                
+                <div id="notas" class="j_close2"> <!-- CLASSE DE FECHAMENTO PARA BOTÃO COM ONCLICK -->
+                    <span class="icon-close2" onclick="javascript:fechar('.j_close2');"></span> 
+                    <div id="icon_notas">
+                        <p class="boxNum icon-alert"></p><!-- ICONE DE NOTIFICAÇÃO -->
+                        <i class="icon-sino"></i>
+                    </div>
+                    <div id="msgnota">
+                        <p>Por favor preencha todos os campos</p>
+                    </div>
+                </div>
+                
+                <div id="notas" class="j_nota3"> <!-- CLASSE DE FECHAMENTO PARA BOTÃO COM ONCLICK -->
+                    <span class="icon-close2" onclick="javascript:fechar('.j_nota3');"></span>
+                    <div id="icon_notas">
+                        <p class="boxNum icon-close"></p><!-- ICONE DE NOTIFICAÇÃO -->
+                        <i class="icon-sino"></i>
+                    </div>
+                    <div id="msgnota">
+                        <p>Algo deu errado, click para mais</p>
+                        <a href="#">mais</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </body>
+        
+        <script type="text/javascript" src="jquery.min.js"></script>
+        <script type="text/javascript">
+        //NOTAS
+        $(document).ready(function(){
+
+            // FUNCAO CHAMA EM CASCATA A NOTIFICACAO
+            $('#pNotas #notas').each(function (i, el) { // percorrer cada elemento
+                setTimeout(function () {   
+                    $(el).addClass('slide-left');  // adicionar a classe de animação
+                }, i * 100); // usar o indice do .each() do jQuery para multiplicar por 100 milisegundos para chamar o próximo
+            });
+
+            // FUNCAO REMOVE EM CASCATA COM TIME A NOTIFICACAO
+            var indice = 0;
+            var interval = setInterval(function() {
+                var proximo = $("#pNotas #notas").eq(indice++);
+                if ( proximo.length == 0 )
+                    clearInterval(interval);
+                else
+                    proximo.removeClass('slide-left').addClass("slide-out-right");
+            }, 10000); // TEMPO PARA REMOVER
+        });
+
+        // FUNCAO FECHAR NOTA COM BOTAO E ONCLICK 
+        function fechar(id){
+            $(id).removeClass('slide-left').addClass('slide-out-right'); // REMOVE CLASS DE ANIMAÇÃO DE ENTRADA E ADICIONA CLASS ANIMAÇÃO DE SAÍDA
+        }
+        </script>
+</html>
